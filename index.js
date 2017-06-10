@@ -16,7 +16,7 @@ app.use(bodyParser.json())
 app.post('/setname',function(req,res){
     un=req.body.user;
     console.log(un);
-    res.end();
+    
 })
 
 io.on('connection', function(socket){
