@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <script></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous">
+        </script>
+        <script src="/socket.io/socket.io.js"></script>
+        <title>Chatter</title>
+        <script>
+            var socket = io();
+            $(document).ready(function(){
+                console.log('Jquery loaded');
+                var person = prompt("Please enter your chat name", "Unknown");
+                $('#message').keydown(function(){
+                    var msg=this.value;
+                    if(event.which==13)
+                    {
+                        socket.emit('messagetoserver',msg);
+                        this.value="";
+                    }
+                })
+                socket.on('appendmessage',function(data){
+                    $('#disMes').append("<br>"+data.name+" says: </br>"+data.msg);
+                    $('#disMes').append("<br>");
+                })
+
+            });
+
+        </script>
+    </head>
+    <body>
+        <form method="POST" action="/setname">
+            <label>Set your chat name</label>
+            <input type="text" name="user">
+            <input type="submit" value="Set">
+        </form>
+
+        <label for="message">Enter your message</label>
+        <input type="text" id="message">
+        
+        <hr><hr>
+        Messages: <br>
+        <dic id="disMes">
+            </div>
+
+    </body>
+</html>
