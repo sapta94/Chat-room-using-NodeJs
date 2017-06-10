@@ -9,7 +9,7 @@
             var socket = io();
             $(document).ready(function(){
                 console.log('Jquery loaded');
-                var person = prompt("Please enter your chat name", "Unknown");
+                
                 $('#message').keydown(function(){
                     var msg=this.value;
                     if(event.which==13)
