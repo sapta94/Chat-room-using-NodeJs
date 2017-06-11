@@ -19,7 +19,7 @@
                     }
                 })
                 socket.on('appendmessage',function(data){
-                    $('#disMes').append("<br>"+data.name+" says: </br>"+data.msg);
+                    $('#disMes').append("<b>"+data.name+" says: </b>"+data.msg);
                     $('#disMes').append("<br>");
                 })
 
