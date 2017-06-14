@@ -12,6 +12,9 @@
                 
                 $('#message').keydown(function(){
                     var msg=this.value;
+                    var usr = $('#user').val();
+                    msg=usr+" says: "+msg;
+                    console.log(usr);
                     if(event.which==13)
                     {
                         socket.emit('messagetoserver',msg);
@@ -19,7 +22,7 @@
                     }
                 })
                 socket.on('appendmessage',function(data){
-                    $('#disMes').append("<b>"+data.name+" says: </b>"+data.msg);
+                    $('#disMes').append(data.msg);
                     $('#disMes').append("<br>");
                 })
 
@@ -28,11 +31,11 @@
         </script>
     </head>
     <body>
-        <form method="POST" action="/setname">
+        
             <label>Set your chat name</label>
-            <input type="text" name="user">
-            <input type="submit" value="Set">
-        </form>
+            <input type="text" id="user">
+            <input type="submit" id="sb" value="Set" onclick="setname()">
+          <br><br>
 
         <label for="message">Enter your message</label>
         <input type="text" id="message">
@@ -41,6 +44,18 @@
         Messages: <br>
         <dic id="disMes">
             </div>
-
+        <script>
+            function setname() {
+            if($('#user').prop('readonly'))
+            {
+                $('#user').removeAttr('readonly');
+                $('#sb').val("Set");
+            }
+            else{
+                  $('#user').attr('readonly', 'readonly');
+                  $('#sb').val("Reset");
+                }
+            }
+        </script>
     </body>
 </html>
